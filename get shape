@@ -1,0 +1,66 @@
+import turtle
+
+class Shape():
+    def __init__(self, x=0, y=0, fill="", pen="", pensize=1, filled=False):
+        self.x = x
+        self.y = y
+        self.fill = fill
+        self.pen = pen
+        self.pensize = pensize
+        self.filled = filled
+
+    def setFillcolor(self, istr):
+        self.fill = istr
+
+    def setFilled(self, ibool):
+        self.filled = ibool
+
+    def isFilled(self):
+        return self.filled
+
+class Circle(Shape):
+    def __init__(self, x=0, y=0, radius=1, fill="", pen="", pensize=1, filled=False):
+        self.radius = radius
+        super().__init__(x, y, fill, pen, pensize, filled)
+
+    def draw(self, t):
+        t.penup()
+        t.goto(self.x, self.y)
+        t.pendown()
+        t.pencolor(self.pen)
+        t.pensize(self.pensize)
+        if self.filled:
+            t.fillcolor(self.fill)
+            t.begin_fill()
+            t.circle(self.radius)
+            t.end_fill()
+        else:
+            t.circle(self.radius)
+
+class Rectangle(Shape):
+    def __init__(self, x=0, y=0, length=1, width=1, fill="", pen="", pensize=1, filled=False):
+        self.length = length
+        self.width = width
+        super().__init__(x, y, fill, pen, pensize, filled)
+
+    def draw(self, t):
+        t.penup()
+        t.goto(self.x, self.y)
+        t.pendown()
+        t.pencolor(self.pen)
+        t.pensize(self.pensize)
+        if self.filled:
+            t.fillcolor(self.fill)
+            t.begin_fill()
+            for i in range(2):
+                t.forward(self.length)
+                t.right(90)
+                t.forward(self.width)
+                t.right(90)
+            t.end_fill()
+        else:
+            for i in range(2):
+                t.forward(self.length)
+                t.right(90)
+                t.forward(self.width)
+                t.right(90)
