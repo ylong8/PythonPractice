@@ -1,0 +1,30 @@
+# PythonPractice
+import turtle
+import random
+
+from shape import *
+from getColor import *
+
+class Display():    
+    def __init__(self):
+        self.t = turtle.Turtle()
+        self.scr = turtle.Screen()
+        self.elements = []
+        self.t.speed(0)
+        self.scr.delay(0)
+        self.t.hideturtle()
+        
+        self.scr.onclick(self.mouseEvent)
+        self.scr.listen()
+
+    def mouseEvent(self, x, y):
+        num = random.randint(1, 2)
+        if num == 1:
+            shape = Circle(x, y, random.randint(10, 100), randColor(), randColor(),\
+                           random.randint(1, 10), True)
+        elif num == 2:
+            shape = Rectangle(x, y, random.randint(10, 100), random.randint(10, 100),\
+                              randColor(), randColor(), random.randint(1, 10), True)
+        self.elements.append(shape)
+        shape.draw(self.t)
+        
